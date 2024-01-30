@@ -1,4 +1,6 @@
 const oldReddit = "https://old.reddit.com";
+const newReddit = "https://new.reddit.com"; // for new reddit
+
 const excludedPaths = [
   /^\/media/,
   /^\/poll/,
@@ -24,11 +26,11 @@ chrome.webRequest.onBeforeRequest.addListener(
     if (url.pathname.indexOf("/gallery") === 0) {
       return {
         redirectUrl:
-          oldReddit + "/comments" + url.pathname.slice("/gallery".length),
+          newReddit + "/comments" + url.pathname.slice("/gallery".length),
       };
     }
 
-    return { redirectUrl: oldReddit + url.pathname + url.search + url.hash };
+    return { redirectUrl: newReddit + url.pathname + url.search + url.hash }; // changed to new
   },
   {
     urls: [
